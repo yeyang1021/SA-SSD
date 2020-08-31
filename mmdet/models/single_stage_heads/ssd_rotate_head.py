@@ -358,7 +358,8 @@ class SSDRotateHead(nn.Module):
 
             if self._use_direction_classifier:
                 dir_labels = dir_labels[selected]
-                opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.bool()
+                #opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.bool()
+                opp_labels = (box_preds[..., -1] > 0) ^ dir_labels.byte()
                 box_preds[opp_labels, -1] += np.pi
 
             # add ground-truth
